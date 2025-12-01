@@ -23,10 +23,10 @@ public class WebhookChallengeService {
     private static final String WEBHOOK_SUBMISSION_URL = "https://bfhldevapigw.healthrx.co.in/hiring/testWebhook/JAVA";
 
     public void executeChallenge() {
-        logger.info("🚀 STARTING WEBHOOK CHALLENGE");
+        logger.info(" STARTING WEBHOOK CHALLENGE");
 
         try {
-            logger.info("📡 Step 1: Sending POST request to generate webhook...");
+            logger.info(" Step 1: Sending POST request to generate webhook...");
             WebhookResponse webhookResponse = generateWebhook();
 
             if (webhookResponse != null && webhookResponse.getWebhook() != null) {
@@ -37,7 +37,7 @@ public class WebhookChallengeService {
                                 webhookResponse.getAccessToken().substring(0, Math.min(20, webhookResponse.getAccessToken().length())) :
                                 "null");
 
-                logger.info("Step 2: Solving SQL problem for regNo 187 (Odd)...");
+                logger.info("Step 2: Solving SQL problem...");
                 String finalSqlQuery = solveSqlProblem();
                 logger.info("SQL solution generated successfully");
                 logger.info("Step 3: Submitting solution to webhook URL...");
@@ -59,7 +59,7 @@ public class WebhookChallengeService {
             logger.info("Sending POST request to: {}", WEBHOOK_GENERATION_URL);
 
             // Create request payload exactly as specified
-            WebhookRequest request = new WebhookRequest("Vedansh Jain", "187", "vedansh.code@gmail.com");
+            WebhookRequest request = new WebhookRequest("Tanmay Patel", "2911", "tptanmaypatel9@gmail.com");
             logger.info("Request payload: name='{}', regNo='{}', email='{}'",
                     request.getName(), request.getRegNo(), request.getEmail());
 
@@ -155,7 +155,7 @@ public class WebhookChallengeService {
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 logger.info("SOLUTION SUBMITTED SUCCESSFULLY!");
-                logger.info("📄 Response body: {}", response.getBody());
+                logger.info(" Response body: {}", response.getBody());
             } else {
                 logger.error("Solution submission failed with status: {}", response.getStatusCode());
                 logger.error("Response body: {}", response.getBody());
