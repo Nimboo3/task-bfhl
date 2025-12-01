@@ -1,16 +1,16 @@
 # Webhook Challenge - Spring Boot Application
 
-A Spring Boot application that automatically generates a webhook, solves a SQL problem, and submits the solution using JWT authentication.
+A Spring Boot application designed to automate the process of generating a webhook, solving a SQL challenge, and submitting the solution via JWT authentication.
 
 ---
 
 ## 🎯 Overview
 
-This Spring Boot application performs the following automated tasks on startup:
+Upon startup, this application automatically executes the following sequence of tasks:
 
-1. **Webhook Generation**: Sends a POST request to generate a webhook with registration details  
-2. **SQL Problem Solving**: Solves a predefined SQL query based on registration number (odd/even)  
-3. **Solution Submission**: Submits the SQL solution to the webhook URL using JWT authentication  
+1. **Webhook Creation**: Initiates a POST request to register and generate a webhook endpoint.
+2. **SQL Challenge Resolution**: Computes the solution for a specific SQL problem determined by the registration number (odd/even logic).
+3. **Submission**: Transmits the derived SQL query to the webhook URL, authenticated with a JWT.
 
 ---
 
@@ -64,16 +64,16 @@ webbookchallenge
 └── pom.xml
 ```
 
-## 🔧 Requirements
+## 🔧 Prerequisites
 
-- **Java**: 11 or higher  
-- **Maven**: 3.6.0 or higher  
-- **Spring Boot**: 2.7.x or higher  
-- **Internet Connection**: Required for API calls  
+- **Java**: Version 11 or newer
+- **Maven**: Version 3.6.0 or newer
+- **Spring Boot**: Version 2.7.x or newer
+- **Network**: Active internet connection for external API communication
 
 ---
 
-## 🚀 Setup Instructions
+## 🚀 Installation & Usage
 
 ### 1. Clone the Repository
 ```bash
@@ -83,33 +83,33 @@ cd webhookchallenge
 2. Build the Project
 bashmvn clean install
 
-3. Run the Application
+3. Launch the Application
 bashmvn spring-boot:run
 
-Or run the JAR file:
+Alternatively, execute the JAR directly:
 bashjava -jar target/webhookchallenge-0.0.1-SNAPSHOT.jar
 
 ```
 
-## ⚙️ How It Works
+## ⚙️ Workflow
 
-### 🚀 Startup Flow
-1. **Application Startup**: `ApplicationStartupRunner` executes automatically.  
-2. **Webhook Generation**: `POST` request sent to generate webhook endpoint.  
-3. **Response Processing**: Extract webhook URL and access token.  
-4. **SQL Solution**: Solve the SQL problem based on registration number (`REG12347` - odd).  
-5. **Solution Submission**: `POST` the SQL query to webhook URL with **JWT authentication**.  
-
----
-
-### 📝 Registration Logic
-- **Registration Number**: `REG12347` (ends in `47` → odd)  
-- **Question Type**: Odd → **Question 1**  
-  > Highest salary not on 1st day of month  
+### 🚀 Execution Sequence
+1. **Startup**: The `ApplicationStartupRunner` triggers automatically when the app launches.
+2. **Webhook Request**: A `POST` request is dispatched to create a webhook endpoint.
+3. **Response Handling**: The application parses the response to retrieve the webhook URL and access token.
+4. **SQL Logic**: The system solves the SQL challenge corresponding to the registration number (`REG12347` - odd).
+5. **Final Submission**: The constructed SQL query is `POST`ed to the webhook URL using **JWT authentication**.
 
 ---
 
-## 🌐 API Endpoints
+### 📝 Registration Details
+- **Reg Number**: `REG12347` (ends with `47` → odd)
+- **Challenge Type**: Odd → **Question 1**
+  > Identify the highest salary that was not paid on the 1st of the month.
+
+---
+
+## 🌐 API Reference
 
 bash
 ```
@@ -132,9 +132,9 @@ Content-Type: application/json
 }
 ```
 
-## 🗄️ SQL Problem Statement
+## 🗄️ SQL Challenge Description
 
-### 📂 Database Schema  
+### 📂 Database Structure
 
 #### **DEPARTMENT Table**
 | Column          | Type    | Description                |
@@ -162,7 +162,7 @@ Content-Type: application/json
 
 ---
 
-### 📊 Sample Data  
+### 📊 Sample Dataset
 
 #### **DEPARTMENT**
 | DEPARTMENT_ID | DEPARTMENT_NAME |
@@ -210,55 +210,55 @@ Content-Type: application/json
 
 ---
 
-### 📝 Problem Requirements  
-Find the **highest salary** credited to an employee, but only for transactions that were **NOT made on the 1st day of any month**.  
+### 📝 Query Objectives
+Determine the **maximum salary** paid to an employee, excluding any transactions that occurred **on the 1st day of the month**.
 
-Extract the following fields:  
-- **SALARY** → Highest salary amount  
-- **NAME** → Full name (`FIRST_NAME + ' ' + LAST_NAME`)  
-- **AGE** → Employee age (calculated from `DOB`)  
-- **DEPARTMENT_NAME** → Department name  
-
----
-
-### ⚖️ Constraints  
-- Exclude payments made **on the 1st day** of any month.  
-- Return **only the employee with the highest qualifying salary**.  
-- Name must be combined as `"FirstName LastName"`.  
-- Age must be calculated based on the **current date**.  
+The result must include:
+- **SALARY** → The maximum salary figure
+- **NAME** → Full name formatted as (`FIRST_NAME + ' ' + LAST_NAME`)
+- **AGE** → Current age of the employee (derived from `DOB`)
+- **DEPARTMENT_NAME** → Name of the department
 
 ---
 
-### ✅ Expected Output  
-The query should return **one row** with columns:  
+### ⚖️ Rules & Constraints
+- Filter out payments made **on the 1st**.
+- Output **only the single record** with the highest valid salary.
+- Name format: `"FirstName LastName"`.
+- Age calculation: Based on the **current date**.
+
+---
+
+### ✅ Desired Output
+The query should yield **a single row** with the following columns:
 
 | SALARY | NAME             | AGE | DEPARTMENT_NAME |
 |--------|------------------|-----|-----------------|
 | 1667827| Olivia Davis     | 30  | HR              |
 
-Example output format:
+Sample output format:
 SALARY    | NAME        | AGE | DEPARTMENT_NAME
 ----------|-------------|-----|----------------
 74998.00  | Emily Brown | 32  | Sales
 
-## 🛠️ Technologies Used
-- **Spring Boot 2.7.x** → Main framework  
-- **RestTemplate** → HTTP client for API calls  
-- **Maven** → Dependency management  
-- **SLF4J** → Logging framework  
-- **Jackson** → JSON processing  
+## 🛠️ Tech Stack
+- **Spring Boot 2.7.x** → Core application framework
+- **RestTemplate** → Client for HTTP requests
+- **Maven** → Build and dependency tool
+- **SLF4J** → Logging abstraction
+- **Jackson** → JSON serialization/deserialization
 
 ---
 
-## 📝 Logging
-The application includes comprehensive logging for:  
-- Application startup events  
-- API request/response details  
-- SQL query execution  
-- Error handling and debugging  
+## 📝 Logging Details
+The application features detailed logging covering:
+- Startup sequence
+- API request and response payloads
+- SQL query generation
+- Error tracking
 
-### ⚙️ Log Configuration
-Log levels can be configured in `application.properties`:  
+### ⚙️ Log Settings
+Adjust log levels in `application.properties`:
 
 ```properties
 logging.level.com.example.webhookchallenge=DEBUG
@@ -272,51 +272,51 @@ logging.level.org.springframework.web.client=DEBUG
 
 ```
 
-## 🔍 Troubleshooting
+## 🔍 Troubleshooting Guide
 
-### ⚠️ Common Issues  
+### ⚠️ Potential Issues
 
-#### 1. Connection Timeout  
-- Check internet connectivity  
-- Verify API endpoints are accessible  
-- Check firewall settings  
+#### 1. Timeouts
+- Verify your internet connection.
+- Ensure the API endpoints are reachable.
+- Check for firewall restrictions.
 
-#### 2. Authentication Errors  
-- Ensure JWT token is correctly formatted  
-- Check header format:  
+#### 2. Auth Failures
+- Confirm the JWT token format.
+- Verify the header structure:
   ```http
   Authorization: <accessToken>
   ```
-- Verify token hasn't expired
+- Ensure the token is still valid.
 
-### 🐛 JSON Parsing Errors  
-- Verify request body format matches expected structure  
-- Check `Content-Type` headers are set correctly  
-- Ensure special characters are properly escaped  
+### 🐛 JSON Errors
+- Check that the request body matches the required schema.
+- Confirm `Content-Type` is set to `application/json`.
+- Ensure proper escaping of special characters.
 
 ---
 
-### 🗄️ SQL Query Issues  
-- Verify SQL syntax is correct  
-- Test query logic with sample data  
-- Check date filtering conditions  
+### 🗄️ SQL Troubleshooting
+- Validate SQL syntax.
+- Test logic against the provided sample data.
+- Double-check date exclusion logic.
 
-### 🐞 Debug Mode
-Enable debug logging to see detailed request/response information:
+### 🐞 Debugging
+Activate debug logs for granular request/response inspection:
 
 ```properties
 logging.level.root=DEBUG
 logging.level.org.springframework.web=DEBUG
 ```
 
-### 🌐 HTTP Response Codes
+### 🌐 HTTP Status Codes
 
 | Code | Meaning                                   |
 |------|-------------------------------------------|
-| 200  | ✅ OK – Request successful                 |
-| 400  | ❌ Bad Request – Invalid request format   |
-| 401  | 🔑 Unauthorized – Invalid or missing JWT token |
-| 500  | 💥 Internal Server Error – Server-side error |
+| 200  | ✅ OK – Operation successful               |
+| 400  | ❌ Bad Request – Malformed request        |
+| 401  | 🔑 Unauthorized – Invalid/missing token   |
+| 500  | 💥 Internal Server Error – Server failure |
 
 
-Note: This application runs automatically on startup with no manual intervention required. The entire workflow is executed programmatically using the configured registration details (REG187 - odd question type).
+Note: This application is designed to run autonomously upon startup. The complete workflow executes programmatically using the pre-configured registration data (REG187 - odd question type).
